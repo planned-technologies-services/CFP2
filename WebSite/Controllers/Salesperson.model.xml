@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Salesperson" alias="Salesperson" created="2017-06-04T13:26:55" modified="2017-06-05T06:35:03" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="division_code_default" parentTableSchema="dbo" parentTableName="Division" x="344" y="20">
+      <foreignKeyColumn columnName="division_code_default" parentColumnName="division_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="salesperson_code" fieldName="SalespersonCode" label="Salesperson Code" />
+    <column name="salesperson_name" fieldName="SalespersonName" label="Salesperson Name" />
+    <column name="comment" fieldName="Comment" label="Comment" />
+    <column name="division_code_default" fieldName="DivisionCodeDefault" label="Division Code Default" />
+    <column name="division_desc" fieldName="DivisionCodeDefaultdivisionDesc" label="Division Description" foreignKey="division_code_default" />
+    <column name="status" fieldName="Status" label="Status" />
+    <column name="created_date" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="created_by" fieldName="CreatedBy" label="Created By" />
+    <column name="updated_date" fieldName="UpdatedDate" label="Updated Date" format="g" />
+    <column name="email_address" fieldName="EmailAddress" label="Email Address" />
+  </columns>
+</dataModel>

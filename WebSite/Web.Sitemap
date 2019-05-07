@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+  <siteMapNode title="^SiteHome^Home^SiteHome^" description="" url="~/index.html">
+    <siteMapNode title="^HomePath^Home^HomePath^" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/home" cssClass="Wide material-icon-home" />
+    <siteMapNode title="Job By Month" description="View Job By Month" url="~/pages/job-by-month" cssClass="material-icon-business" />
+    <siteMapNode title="Salesperson Target" description="View Salesperson Target" url="~/pages/salesperson-target" cssClass="material-icon-equalizer" />
+    <siteMapNode title="Salesperson" description="View Salesperson" url="~/pages/salesperson" cssClass="material-icon-group" />
+    <siteMapNode title="Maintenance" description="" url="~/pages/maintenance" roles="*" cssClass="material-icon-build">
+      <siteMapNode title="Budget Year" description="View Budget Year" url="~/pages/budget-year" cssClass="material-icon-date-range" />
+      <siteMapNode title="Division" description="View Division" url="~/pages/division" cssClass="material-icon-wallpaper" />
+      <siteMapNode title="User" description="View User" url="~/pages/user" cssClass="material-icon-person" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

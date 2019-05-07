@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="User" alias="User" created="2017-06-04T13:26:54" modified="2017-06-05T06:47:13" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="userid" fieldName="Userid" label="Userid" />
+    <column name="username" fieldName="Username" label="Username" />
+    <column name="password" fieldName="Password" label="Password" />
+    <column name="emailaddress" fieldName="Emailaddress" label="Email Address" />
+    <column name="created_date" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="created_by" fieldName="Createdby" label="Created by" />
+  </columns>
+</dataModel>

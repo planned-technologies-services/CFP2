@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="SalespersonTarget" alias="SalespersonTarget" created="2017-06-04T20:35:43" modified="2017-06-05T05:37:20" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="salesperson" parentTableSchema="dbo" parentTableName="Salesperson" x="357" y="20">
+      <foreignKeyColumn columnName="salesperson_code" parentColumnName="salesperson_code" />
+    </foreignKey>
+    <foreignKey id="salesperson_division_code_default" parentTableSchema="dbo" parentTableName="Division" baseForeignKey="salesperson" x="682" y="20">
+      <foreignKeyColumn columnName="division_code_default" parentColumnName="division_code" />
+    </foreignKey>
+    <foreignKey id="division" parentTableSchema="dbo" parentTableName="Division" x="357" y="204">
+      <foreignKeyColumn columnName="division_code" parentColumnName="division_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="salesperson_code" fieldName="SalespersonCode" label="Salesperson Code" />
+    <column name="salesperson_name" fieldName="SalespersonName" label="Salesperson Name" foreignKey="salesperson" />
+    <column name="division_desc" fieldName="SalespersonDivisionCodeDefaultdivisionDesc" label="Division" foreignKey="salesperson_division_code_default" />
+    <column name="tyear" fieldName="Tyear" label="Year" />
+    <column name="division_code" fieldName="DivisionCode" label="Division Code" />
+    <column name="division_desc" fieldName="DivisionDesc" label="Division Desc" foreignKey="division" />
+    <column name="target_revenue_amt" fieldName="TargetRevenueAmt" label="Target Revenue Amt" format="{0:C0}" />
+    <column name="target_gp_amt" fieldName="TargetGpAmt" label="Target Gross Profit Amt" format="{0:C0}" />
+    <column name="target_backlog_amt" fieldName="TargetBacklogAmt" label="Target Backlog Amt" format="{0:C0}" />
+    <column name="target_gp_perc" fieldName="TargetGpPerc" label="Target Gross Percentage" format="N2" />
+    <column name="created_date" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="created_by" fieldName="CreatedBy" label="Created By" />
+    <column name="updated_date" fieldName="UpdatedDate" label="Updated Date" format="g" />
+  </columns>
+</dataModel>

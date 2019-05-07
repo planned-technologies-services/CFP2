@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="JobByMonth" conflictDetection="overwriteChanges" label="Job By Month" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"JobByMonth"."tyear" "Tyear"
+	,"JobByMonth"."tmonth" "Tmonth"
+	,"JobByMonth"."jobno" "Jobno"
+	,"JobByMonth"."salesperson_code" "SalespersonCode"
+	,"salesperson"."salesperson_name" "SalespersonName"
+	,"salesperson_division_code_default"."division_desc" "SalespersonDivisionCodeDefaultdivisionDesc"
+	,"JobByMonth"."division_code" "DivisionCode"
+	,"division"."division_desc" "DivisionDesc"
+	,"JobByMonth"."revenue_amt" "RevenueAmt"
+	,"JobByMonth"."grossprofit_amt" "GrossprofitAmt"
+	,"JobByMonth"."backlog_amt" "BacklogAmt"
+	,"JobByMonth"."contract_amt" "ContractAmt"
+	,"JobByMonth"."estimate_amt" "EstimateAmt"
+	,"JobByMonth"."jobcomplete_perc" "JobcompletePerc"
+	,"JobByMonth"."revenuetodate_amt" "RevenuetodateAmt"
+	,"JobByMonth"."grossprofittodate_amt" "GrossprofittodateAmt"
+	,"JobByMonth"."comment" "Comment"
+	,"JobByMonth"."created_date" "CreatedDate"
+	,"JobByMonth"."created_by" "CreatedBy"
+	,"JobByMonth"."updated_date" "UpdatedDate"
+	,"JobByMonth"."over_amt" "OverAmt"
+	,"JobByMonth"."under_amt" "UnderAmt"
+	,"JobByMonth"."isdefault_division_code" "IsdefaultDivisionCode"
+from "dbo"."JobByMonth" "JobByMonth"
+	left join "dbo"."Salesperson" "salesperson" on "JobByMonth"."salesperson_code" = "salesperson"."salesperson_code"
+	left join "dbo"."Division" "salesperson_division_code_default" on "salesperson"."division_code_default" = "salesperson_division_code_default"."division_code"
+	left join "dbo"."Division" "division" on "JobByMonth"."division_code" = "division"."division_code"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Jobno" type="String" allowNulls="false" isPrimaryKey="true" label="Jobno" length="25" showInSummary="true" />
+    <field name="Tyear" type="String" allowNulls="false" isPrimaryKey="true" label="Year" length="4" showInSummary="true" />
+    <field name="Tmonth" type="Int32" allowNulls="false" isPrimaryKey="true" label="Month" />
+    <field name="SalespersonCode" type="String" label="Salesperson Code" length="6" showInSummary="true">
+      <items style="Lookup" dataController="Salesperson" newDataView="createForm1" dataValueField="SalespersonCode" dataTextField="SalespersonCode" copy="SalespersonName=SalespersonName, SalespersonDivisionCodeDefaultdivisionDesc=DivisionCodeDefaultdivisionDesc" />
+    </field>
+    <field name="SalespersonName" type="String" readOnly="true" label="Salesperson Name" length="50" />
+    <field name="SalespersonDivisionCodeDefaultdivisionDesc" type="String" readOnly="true" label="Division Desc" length="20" />
+    <field name="DivisionCode" type="String" label="Division Code" length="2" showInSummary="true">
+      <items style="Lookup" dataController="Division" newDataView="createForm1" dataValueField="DivisionCode" dataTextField="DivisionCode" copy="DivisionDesc=DivisionDesc" />
+    </field>
+    <field name="IsdefaultDivisionCode" type="String" default="('Y')" label="Is Default Division" length="1">
+      <items style="RadioButtonList">
+        <item value="N" text="No" />
+        <item value="Y" text="Yes" />
+      </items>
+    </field>
+    <field name="RevenueAmt" type="Decimal" dataFormatString="{0:C0}" label="Revenue Amount" showInSummary="true" />
+    <field name="GrossprofitAmt" type="Decimal" dataFormatString="{0:C0}" label="Gross Profit Amount" />
+    <field name="BacklogAmt" type="Decimal" dataFormatString="{0:C0}" label="Backlog Amount" />
+    <field name="ContractAmt" type="Decimal" dataFormatString="{0:C0}" label="Contract Amount" />
+    <field name="EstimateAmt" type="Decimal" dataFormatString="{0:C0}" label="Estimate Amount" />
+    <field name="JobcompletePerc" type="Decimal" dataFormatString="N2" label="Job Completion Percentage" />
+    <field name="RevenuetodateAmt" type="Decimal" dataFormatString="{0:C0}" label="Revenue to Date Amount" />
+    <field name="GrossprofittodateAmt" type="Decimal" dataFormatString="{0:C0}" label="Gross Profit to Date Amount" />
+    <field name="Comment" type="String" allowQBE="false" allowSorting="false" label="Comment" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="20" />
+    <field name="UpdatedDate" type="DateTime" dataFormatString="g" label="Updated Date" />
+    <field name="OverAmt" type="Decimal" dataFormatString="{0:C0}" label="Over Amount" />
+    <field name="UnderAmt" type="Decimal" label="Under Amt" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Job By Month">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Jobno" columns="25" />
+        <dataField fieldName="Tyear" columns="4" />
+        <dataField fieldName="Tmonth" columns="15" />
+        <dataField fieldName="SalespersonCode" columns="6" />
+        <dataField fieldName="SalespersonName" columns="50" />
+        <dataField fieldName="DivisionCode" columns="2" />
+        <dataField fieldName="SalespersonDivisionCodeDefaultdivisionDesc" columns="20" />
+        <dataField fieldName="IsdefaultDivisionCode" columns="1" />
+        <dataField fieldName="RevenueAmt" columns="15" />
+        <dataField fieldName="GrossprofitAmt" columns="15" />
+        <dataField fieldName="BacklogAmt" columns="15" />
+        <dataField fieldName="ContractAmt" columns="15" />
+        <dataField fieldName="EstimateAmt" columns="15" />
+        <dataField fieldName="JobcompletePerc" columns="15" />
+        <dataField fieldName="RevenuetodateAmt" columns="15" />
+        <dataField fieldName="GrossprofittodateAmt" columns="15" />
+        <dataField fieldName="OverAmt" columns="15" />
+        <dataField fieldName="UnderAmt" columns="15" />
+        <dataField fieldName="Comment" rows="5" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="20" />
+        <dataField fieldName="UpdatedDate" columns="20" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Job By Month" tags="material-icon-business">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Job By Month" flow="NewColumn">
+          <description><![CDATA[$row.Jobno]]></description>
+          <dataFields>
+            <dataField fieldName="Jobno" columns="25" />
+            <dataField fieldName="Tyear" columns="4" />
+            <dataField fieldName="Tmonth" columns="15" />
+            <dataField fieldName="SalespersonCode" columns="6" />
+            <dataField fieldName="SalespersonName" columns="50" />
+            <dataField fieldName="DivisionCode" columns="2" />
+            <dataField fieldName="SalespersonDivisionCodeDefaultdivisionDesc" columns="20" />
+            <dataField fieldName="IsdefaultDivisionCode" columns="1" />
+            <dataField fieldName="RevenueAmt" columns="15" />
+            <dataField fieldName="GrossprofitAmt" columns="15" />
+            <dataField fieldName="BacklogAmt" columns="15" />
+            <dataField fieldName="ContractAmt" columns="15" />
+            <dataField fieldName="EstimateAmt" columns="15" />
+            <dataField fieldName="JobcompletePerc" columns="15" />
+            <dataField fieldName="RevenuetodateAmt" columns="15" />
+            <dataField fieldName="GrossprofittodateAmt" columns="15" />
+            <dataField fieldName="OverAmt" columns="15" />
+            <dataField fieldName="UnderAmt" columns="15" />
+            <dataField fieldName="Comment" rows="5" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="20" />
+            <dataField fieldName="UpdatedDate" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Job By Month" tags="material-icon-business">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Job By Month" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Jobno" columns="25" />
+            <dataField fieldName="Tyear" columns="4" />
+            <dataField fieldName="Tmonth" columns="15" />
+            <dataField fieldName="SalespersonCode" columns="6" />
+            <dataField fieldName="SalespersonName" columns="50" />
+            <dataField fieldName="DivisionCode" columns="2" />
+            <dataField fieldName="SalespersonDivisionCodeDefaultdivisionDesc" columns="20" />
+            <dataField fieldName="IsdefaultDivisionCode" columns="1" />
+            <dataField fieldName="RevenueAmt" columns="15" />
+            <dataField fieldName="GrossprofitAmt" columns="15" />
+            <dataField fieldName="BacklogAmt" columns="15" />
+            <dataField fieldName="ContractAmt" columns="15" />
+            <dataField fieldName="EstimateAmt" columns="15" />
+            <dataField fieldName="JobcompletePerc" columns="15" />
+            <dataField fieldName="RevenuetodateAmt" columns="15" />
+            <dataField fieldName="GrossprofittodateAmt" columns="15" />
+            <dataField fieldName="OverAmt" columns="15" />
+            <dataField fieldName="UnderAmt" columns="15" />
+            <dataField fieldName="Comment" rows="5" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="20" />
+            <dataField fieldName="UpdatedDate" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

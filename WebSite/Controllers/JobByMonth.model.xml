@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="JobByMonth" alias="JobByMonth" created="2017-06-04T13:26:55" modified="2017-06-04T21:50:19" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="salesperson" parentTableSchema="dbo" parentTableName="Salesperson" x="349" y="20">
+      <foreignKeyColumn columnName="salesperson_code" parentColumnName="salesperson_code" />
+    </foreignKey>
+    <foreignKey id="salesperson_division_code_default" parentTableSchema="dbo" parentTableName="Division" baseForeignKey="salesperson" x="673" y="20">
+      <foreignKeyColumn columnName="division_code_default" parentColumnName="division_code" />
+    </foreignKey>
+    <foreignKey id="division" parentTableSchema="dbo" parentTableName="Division" x="349" y="201">
+      <foreignKeyColumn columnName="division_code" parentColumnName="division_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="tyear" fieldName="Tyear" label="Year" />
+    <column name="tmonth" fieldName="Tmonth" label="Month" />
+    <column name="jobno" fieldName="Jobno" label="Jobno" />
+    <column name="salesperson_code" fieldName="SalespersonCode" label="Salesperson Code" />
+    <column name="salesperson_name" fieldName="SalespersonName" label="Salesperson Name" foreignKey="salesperson" />
+    <column name="division_desc" fieldName="SalespersonDivisionCodeDefaultdivisionDesc" label="Division Desc" foreignKey="salesperson_division_code_default" />
+    <column name="division_code" fieldName="DivisionCode" label="Division Code" />
+    <column name="division_desc" fieldName="DivisionDesc" label="Division Desc" foreignKey="division" />
+    <column name="revenue_amt" fieldName="RevenueAmt" label="Revenue Amount" format="{0:C0}" />
+    <column name="grossprofit_amt" fieldName="GrossprofitAmt" label="Gross Profit Amount" format="{0:C0}" />
+    <column name="backlog_amt" fieldName="BacklogAmt" label="Backlog Amount" format="{0:C0}" />
+    <column name="contract_amt" fieldName="ContractAmt" label="Contract Amount" format="{0:C0}" />
+    <column name="estimate_amt" fieldName="EstimateAmt" label="Estimate Amount" format="{0:C0}" />
+    <column name="jobcomplete_perc" fieldName="JobcompletePerc" label="Job Completion Percentage" format="N2" />
+    <column name="revenuetodate_amt" fieldName="RevenuetodateAmt" label="Revenue to Date Amount" format="{0:C0}" />
+    <column name="grossprofittodate_amt" fieldName="GrossprofittodateAmt" label="Gross Profit to Date Amount" format="{0:C0}" />
+    <column name="comment" fieldName="Comment" label="Comment" />
+    <column name="created_date" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="created_by" fieldName="CreatedBy" label="Created By" />
+    <column name="updated_date" fieldName="UpdatedDate" label="Updated Date" format="g" />
+    <column name="over_amt" fieldName="OverAmt" label="Over Amount" format="{0:C0}" />
+    <column name="under_amt" fieldName="UnderAmt" label="Under Amt" />
+    <column name="isdefault_division_code" fieldName="IsdefaultDivisionCode" label="Is Default Division" />
+  </columns>
+</dataModel>

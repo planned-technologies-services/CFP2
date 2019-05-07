@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SalespersonTarget" conflictDetection="overwriteChanges" label="Salesperson Target" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"SalespersonTarget"."salesperson_code" "SalespersonCode"
+	,"salesperson"."salesperson_name" "SalespersonName"
+	,"salesperson_division_code_default"."division_desc" "SalespersonDivisionCodeDefaultdivisionDesc"
+	,"SalespersonTarget"."tyear" "Tyear"
+	,"SalespersonTarget"."division_code" "DivisionCode"
+	,"division"."division_desc" "DivisionDesc"
+	,"SalespersonTarget"."target_revenue_amt" "TargetRevenueAmt"
+	,"SalespersonTarget"."target_gp_amt" "TargetGpAmt"
+	,"SalespersonTarget"."target_backlog_amt" "TargetBacklogAmt"
+	,"SalespersonTarget"."target_gp_perc" "TargetGpPerc"
+	,"SalespersonTarget"."created_date" "CreatedDate"
+	,"SalespersonTarget"."created_by" "CreatedBy"
+	,"SalespersonTarget"."updated_date" "UpdatedDate"
+from "dbo"."SalespersonTarget" "SalespersonTarget"
+	left join "dbo"."Salesperson" "salesperson" on "SalespersonTarget"."salesperson_code" = "salesperson"."salesperson_code"
+	left join "dbo"."Division" "salesperson_division_code_default" on "salesperson"."division_code_default" = "salesperson_division_code_default"."division_code"
+	left join "dbo"."Division" "division" on "SalespersonTarget"."division_code" = "division"."division_code"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="SalespersonCode" type="String" allowNulls="false" isPrimaryKey="true" label="Salesperson Code" length="6" showInSummary="true">
+      <items style="Lookup" dataController="Salesperson" newDataView="createForm1" dataValueField="SalespersonCode" dataTextField="SalespersonCode" copy="SalespersonName=SalespersonName, SalespersonDivisionCodeDefaultdivisionDesc=DivisionCodeDefaultdivisionDesc" />
+    </field>
+    <field name="SalespersonName" type="String" readOnly="true" label="Salesperson Name" length="50" />
+    <field name="SalespersonDivisionCodeDefaultdivisionDesc" type="String" readOnly="true" label="Division" length="20" />
+    <field name="Tyear" type="String" allowNulls="false" isPrimaryKey="true" label="Year" length="4" showInSummary="true" />
+    <field name="DivisionCode" type="String" label="Division Code" length="2" showInSummary="true">
+      <items style="Lookup" dataController="Division" newDataView="createForm1" dataValueField="DivisionCode" dataTextField="DivisionCode" copy="DivisionDesc=DivisionDesc" />
+    </field>
+    <field name="DivisionDesc" type="String" readOnly="true" label="Division Desc" length="20" />
+    <field name="TargetRevenueAmt" type="Decimal" dataFormatString="{0:C0}" label="Target Revenue Amt" showInSummary="true" />
+    <field name="TargetGpAmt" type="Decimal" dataFormatString="{0:C0}" label="Target Gross Profit Amt" showInSummary="true" />
+    <field name="TargetBacklogAmt" type="Decimal" dataFormatString="{0:C0}" label="Target Backlog Amt" />
+    <field name="TargetGpPerc" type="Decimal" dataFormatString="N2" label="Target Gross Percentage" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" readOnly="true" />
+    <field name="CreatedBy" type="String" label="Created By" length="20" />
+    <field name="UpdatedDate" type="DateTime" dataFormatString="g" label="Updated Date" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Salesperson Target">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="SalespersonCode" columns="6" />
+        <dataField fieldName="SalespersonName" columns="50" />
+        <dataField fieldName="Tyear" columns="4" />
+        <dataField fieldName="DivisionCode" columns="2" />
+        <dataField fieldName="DivisionDesc" columns="20" />
+        <dataField fieldName="TargetRevenueAmt" columns="15" />
+        <dataField fieldName="TargetBacklogAmt" columns="15" />
+        <dataField fieldName="TargetGpAmt" columns="15" />
+        <dataField fieldName="TargetGpPerc" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Salesperson Target" tags="material-icon-equalizer">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Salesperson Target" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SalespersonCode" columns="6" />
+            <dataField fieldName="SalespersonName" columns="50" />
+            <dataField fieldName="Tyear" columns="4" />
+            <dataField fieldName="DivisionCode" columns="2" />
+            <dataField fieldName="DivisionDesc" columns="20" />
+            <dataField fieldName="TargetRevenueAmt" columns="15" />
+            <dataField fieldName="TargetBacklogAmt" columns="15" />
+            <dataField fieldName="TargetGpAmt" columns="15" />
+            <dataField fieldName="TargetGpPerc" columns="15" />
+            <dataField fieldName="CreatedDate" columns="20" readOnly="true" />
+            <dataField fieldName="CreatedBy" columns="20" />
+            <dataField fieldName="UpdatedDate" columns="20" readOnly="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Salesperson Target" tags="material-icon-equalizer">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Salesperson Target" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SalespersonCode" columns="6" />
+            <dataField fieldName="SalespersonName" columns="50" />
+            <dataField fieldName="Tyear" columns="4" />
+            <dataField fieldName="DivisionCode" columns="2" />
+            <dataField fieldName="DivisionDesc" columns="20" />
+            <dataField fieldName="TargetRevenueAmt" columns="15" />
+            <dataField fieldName="TargetBacklogAmt" columns="15" />
+            <dataField fieldName="TargetGpAmt" columns="15" />
+            <dataField fieldName="TargetGpPerc" columns="15" />
+            <dataField fieldName="CreatedBy" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>
